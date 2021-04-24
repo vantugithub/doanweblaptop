@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,26 +15,27 @@ import BEAN.Product;
 import DAO.ProductDAO;
 import DB.DBConnection;
 
-@WebServlet("/Home")
-public class TrangChuForward extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+@WebServlet("/admin/detailproduct")
+public class EditProduct extends HttpServlet {
+	
 	private ProductDAO dao;
 	
-    public TrangChuForward() {
+	private static final long serialVersionUID = 1L;
+    public EditProduct() {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		String idStr = request.getParameter("id");
+		int idOfProduct = Integer.parseInt(idStr);
 		Connection conn = DBConnection.creatConnection();
 		@SuppressWarnings("static-access")
-		List<Product>list = dao.getAllOfProducts(conn);
+		List<Product> list  = dao.findProductById(conn, idOfProduct);
 		request.setAttribute("list", list);
-		RequestDispatcher rd = request.getRequestDispatcher("View/Web/TrangChu.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/View/Admin/detailofproduct.jsp");
 		rd.forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

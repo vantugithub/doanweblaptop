@@ -42,7 +42,7 @@
 			<div class="row">
 			
 				<div class="col-md-3 col-xs-2">
-					<div id="fh5co-logo"><a href="index.html">Shop.</a></div>
+					<div id="fh5co-logo"><a href="/Laptop">Shop.</a></div>
 				</div>
 				
 				
@@ -97,8 +97,8 @@
 	<aside id="fh5co-hero" class="js-fullheight">
 		<div class="flexslider js-fullheight">
 			<ul class="slides">
-		   	<li style="background-image: url(Template/shop/images/img_bg_1.jpg);">
-		   		<div class="overlay-gradient"></div>
+		   	<li style="background-image: url(Template/shop/images/banner.jpg);">
+		   		<!-- <div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
 		   				<div class="slider-text-inner">
@@ -110,10 +110,10 @@
 		   					</div>
 		   				</div>
 		   			</div>
-		   		</div>
+		   		</div> -->
 		   	</li>
-		   	<li style="background-image: url(Template/shop/images/img_bg_2.jpg);">
-		   		<div class="container">
+		   	<li style="background-image: url(Template/shop/images/banner1.jpg);">
+		   		<!-- <div class="container">
 		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
 		   				<div class="slider-text-inner">
 		   					<div class="desc">
@@ -124,10 +124,10 @@
 		   					</div>
 		   				</div>
 		   			</div>
-		   		</div>
+		   		</div> -->
 		   	</li>
-		   	<li style="background-image: url(Template/shop/images/img_bg_3.jpg);">
-		   		<div class="container">
+		   	<li style="background-image: url(Template/shop/images/Banner-LG.jpg);">
+		   		<!-- <div class="container">
 		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
 		   				<div class="slider-text-inner">
 		   					<div class="desc">
@@ -138,10 +138,10 @@
 		   					</div>
 		   				</div>
 		   			</div>
-		   		</div>
+		   		</div> -->
 		   	</li>
-		   	<li style="background-image: url(Template/shop/images/img_bg_4.jpg);">
-		   		<div class="container">
+		   	<li style="background-image: url(Template/shop/images/Banner-MacBookPro-M1.jpg);">
+		   		<!-- <div class="container">
 		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
 		   				<div class="slider-text-inner">
 		   					<div class="desc">
@@ -152,7 +152,7 @@
 		   					</div>
 		   				</div>
 		   			</div>
-		   		</div>
+		   		</div> -->
 		   	</li>
 		  	</ul>
 	  	</div>
@@ -204,23 +204,30 @@
 				</div>
 			</div>
 			<div class="row">
+				
+				<c:forEach var="lis" items="${list}">
+			
 				<div class="col-md-4 text-center animate-box">
 					<div class="product">
-						<div class="product-grid" style="background-image:url(Template/shop/images/product-1.jpg);">
-							<div class="inner">
+					<a href="#">
+						<img class="product-grid" src="<%=request.getContextPath()%>/image/${lis.image}">
+							<!-- <div class="inner">
 								<p>
 									<a href="single.html" class="icon"><i class="icon-shopping-cart"></i></a>
 									<a href="single.html" class="icon"><i class="icon-eye"></i></a>
 								</p>
-							</div>
-						</div>
+							</div> -->
+						</img>
+					</a>
 						<div class="desc">
-							<h3><a href="single.html">Hauteville Concrete Rocking Chair</a></h3>
-							<span class="price">$350</span>
+							<h3><a href="single.html">${lis.name}</a></h3>
+							<span class="price">$${lis.price}</span>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 text-center animate-box">
+				
+				</c:forEach>
+				<!-- <div class="col-md-4 text-center animate-box">
 					<div class="product">
 						<div class="product-grid" style="background-image:url(Template/shop/images/product-2.jpg);">
 							<span class="sale">Sale</span>
@@ -302,7 +309,7 @@
 							<span class="price">$960</span>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

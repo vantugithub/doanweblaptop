@@ -25,15 +25,21 @@
             </a>
           </li>
           <li>
-            <a href="/Laptop/admin/edituser">
+            <a href="/Laptop/admin">
               <i class="tim-icons icon-single-02"></i>
               <p>User management</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/Laptop/admin/products?page=1">
               <i class="tim-icons icon-puzzle-10"></i>
               <p>Product management</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Laptop/admin/categorys">
+              <i class="tim-icons icon-puzzle-10"></i>
+              <p>Category management</p>
             </a>
           </li>
           <li>

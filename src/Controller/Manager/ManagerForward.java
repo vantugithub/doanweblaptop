@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Manager;
 
 import java.io.IOException;
 
@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin")
-public class AdminForward extends HttpServlet {
+@WebServlet("/employee")
+public class ManagerForward extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdminForward() {
+    public ManagerForward() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("View/Admin/Admin.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("View/Employee/Employee.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
-
 }

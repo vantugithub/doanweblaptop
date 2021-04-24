@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,42 +47,34 @@ public class Login extends HttpServlet {
 			mess.put("password","Please enter password");
 		}
 		if(mess.isEmpty()) {
-			try {
-				Connection conn = DB.DBConnection.creatConnection();
-				MyUser myUser = LoginDAO.checkUsernameAndPasswordOfUser(conn, myUser2);
-				if(myUser.getId()!=0) {
-					String nameRole = LoginDAO.roleOfUser(conn, myUser2.getUsername());
-					Role role  = new Role();
-					role.setRoleName(nameRole);
-					myUser.setRole(role);
-					SessionUtil.getInstance().putValue(request, "USERMODEL" , myUser);
-					if(nameRole.equals("ROLE_ADMIN")) {
-						conn.close();
-						response.sendRedirect(request.getContextPath()+"/admin");
-					}
-					else if(nameRole.equals("ROLE_EMPLOYEE")) {
-						conn.close();
-						response.sendRedirect(request.getContextPath()+"/employee");
-					}
-					else if(nameRole.equals("ROLE_USER")) {
-						conn.close();
-						response.sendRedirect(request.getContextPath()+"/");
-					}
-					else {
-						response.sendRedirect(request.getContextPath()+"/Login");
-					}
+			Connection conn = DB.DBConnection.creatConnection();
+			MyUser myUser = LoginDAO.checkUsernameAndPasswordOfUser(conn, myUser2);
+			if(myUser.getId()!=0) {
+				String nameRole = LoginDAO.roleOfUser(conn, myUser2.getUsername());
+				Role role  = new Role();
+				role.setRoleName(nameRole);
+				myUser.setRole(role);
+				
+				SessionUtil.getInstance().putValue(request, "USERMODEL" , myUser);
+				
+				if(nameRole.equals("ROLE_ADMIN")) {
+					response.sendRedirect(request.getContextPath()+"/admin");
+				}
+				else if(nameRole.equals("ROLE_EMPLOYEE")) {
+					response.sendRedirect(request.getContextPath()+"/employee");
+				}
+				else if(nameRole.equals("ROLE_USER")) {
+					response.sendRedirect(request.getContextPath()+"/");
 				}
 				else {
 					response.sendRedirect(request.getContextPath()+"/Login");
 				}
 			}
-			catch (SQLException e) {
-				e.printStackTrace();
+			else {
+				response.sendRedirect(request.getContextPath()+"/Login");
 			}
 		}
 		else {
-//			RequestDispatcher rd = request.getRequestDispatcher("Login");
-//			rd.forward(request, response);
 			response.sendRedirect(request.getContextPath()+"/Login");
 		}
 	}

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="BEAN.Role"%>
 <%@page import="BEAN.MyUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +13,10 @@
 	href="<%=request.getContextPath()%>/Template/Admin/img/apple-icon.png">
 <link rel="icon" type="image/png"
 	href="<%=request.getContextPath()%>/Template/Admin/img/favicon.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 <title>Edit User</title>
 <!--     Fonts and icons     -->
 <link
@@ -68,130 +73,37 @@ if(session.getAttribute("USERMODEL")!=null) {
 			<div class="content">
 				<div class="row">
 					<div class="col-md-12">
+					
+					
 						<div class="card ">
+							
 							<div class="card-header">
-								<h4 class="card-title">Simple Table</h4>
+							<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Create category</button>
 							</div>
+							
+							<div class="card-header">
+								<h4 class="card-title">List of products</h4>
+							</div>
+							
 							<div class="card-body">
+							
 								<div class="table-responsive">
 									<table class="table tablesorter " id="">
-										<thead class=" text-primary">
+									<thead class=" text-primary">
 											<tr>
+												<th>Id</th>
 												<th>Name</th>
-												<th>Country</th>
-												<th>City</th>
-												<th class="text-center">Salary</th>
+												<th>Delete</th>
 											</tr>
 										</thead>
 										<tbody>
+										<c:forEach items="${list}" var="lis">
 											<tr>
-												<td>Dakota Rice</td>
-												<td>Niger</td>
-												<td>Oud-Turnhout</td>
-												<td class="text-center">$36,738</td>
+												<td>${lis.id}</td>
+												<td>${lis.name}</td>
+												<td><a href="/Laptop/admin/deletecategory?id=${lis.id}"><i class="tim-icons icon-gift-2" ></i></a></td>
 											</tr>
-											<tr>
-												<td>Minerva Hooper</td>
-												<td>Curaçao</td>
-												<td>Sinaai-Waas</td>
-												<td class="text-center">$23,789</td>
-											</tr>
-											<tr>
-												<td>Sage Rodriguez</td>
-												<td>Netherlands</td>
-												<td>Baileux</td>
-												<td class="text-center">$56,142</td>
-											</tr>
-											<tr>
-												<td>Philip Chaney</td>
-												<td>Korea, South</td>
-												<td>Overland Park</td>
-												<td class="text-center">$38,735</td>
-											</tr>
-											<tr>
-												<td>Doris Greene</td>
-												<td>Malawi</td>
-												<td>Feldkirchen in Kärnten</td>
-												<td class="text-center">$63,542</td>
-											</tr>
-											<tr>
-												<td>Mason Porter</td>
-												<td>Chile</td>
-												<td>Gloucester</td>
-												<td class="text-center">$78,615</td>
-											</tr>
-											<tr>
-												<td>Jon Porter</td>
-												<td>Portugal</td>
-												<td>Gloucester</td>
-												<td class="text-center">$98,615</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card  card-plain">
-							<div class="card-header">
-								<h4 class="card-title">Table on Plain Background</h4>
-								<p class="category">Here is a subtitle for this table</p>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table tablesorter " id="">
-										<thead class=" text-primary">
-											<tr>
-												<th>Name</th>
-												<th>Country</th>
-												<th>City</th>
-												<th class="text-center">Salary</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Dakota Rice</td>
-												<td>Niger</td>
-												<td>Oud-Turnhout</td>
-												<td class="text-center">$36,738</td>
-											</tr>
-											<tr>
-												<td>Minerva Hooper</td>
-												<td>Curaçao</td>
-												<td>Sinaai-Waas</td>
-												<td class="text-center">$23,789</td>
-											</tr>
-											<tr>
-												<td>Sage Rodriguez</td>
-												<td>Netherlands</td>
-												<td>Baileux</td>
-												<td class="text-center">$56,142</td>
-											</tr>
-											<tr>
-												<td>Philip Chaney</td>
-												<td>Korea, South</td>
-												<td>Overland Park</td>
-												<td class="text-center">$38,735</td>
-											</tr>
-											<tr>
-												<td>Doris Greene</td>
-												<td>Malawi</td>
-												<td>Feldkirchen in Kärnten</td>
-												<td class="text-center">$63,542</td>
-											</tr>
-											<tr>
-												<td>Mason Porter</td>
-												<td>Chile</td>
-												<td>Gloucester</td>
-												<td class="text-center">$78,615</td>
-											</tr>
-											<tr>
-												<td>Jon Porter</td>
-												<td>Portugal</td>
-												<td>Gloucester</td>
-												<td class="text-center">$98,615</td>
-											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -209,6 +121,62 @@ if(session.getAttribute("USERMODEL")!=null) {
 
 
 	<jsp:include page="Header.jsp" />
+	
+	
+	<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New product</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name product:</label>
+            <input type="text" class="btn btn-success" />
+          </div>
+	          <div class="form-group">
+			        <select class="btn btn-success"id="inlineFormCustomSelect" path="id">
+			        <option value="selected">Choose......................................</option>
+			        <option value="${lis.id}" name=""> ${lis.name} </option>
+			        </select>
+			  </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+        </form> 
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thể loại mới</h5>
+      </div>
+      <div class="modal-body">
+        <form method="GET" action="<%=request.getContextPath()%>/admin/CreateCategory">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Tên thể loại:</label>
+            <input type="text" name="category" class="btn btn-primary">
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	
+	
 	<script
 		src="<%=request.getContextPath()%>/Template/Admin/js/core/jquery.min.js"></script>
 	<script
